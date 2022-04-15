@@ -1,0 +1,71 @@
+﻿<Page x:Class="sp1_desktop.Views.BookingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:viewmodels="clr-namespace:sp1_desktop.ViewModels"
+      xmlns:local="clr-namespace:sp1_desktop.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Gestion de la flotte des véhicules">
+
+    <Page.DataContext>
+        <viewmodels:BookingViewModel/>
+    </Page.DataContext>
+   
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.05"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.05"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.03"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="0.03"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!-- Booked vehicles and to prepare A FINIR -->
+        <StackPanel Margin="10 10 0 0" Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20">
+            Véhicules réservés et à préparer</TextBlock>
+            <Button Margin="10 0 0 0" Command="{Binding FlushCommand}">Actualiser</Button>
+        </StackPanel>
+        <DataGrid Grid.Row="2" Grid.Column="1" 
+                  Margin="20,20,20,20" Grid.RowSpan="2" 
+                  ItemsSource="{Binding AwaitingVehicles }" 
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id }"/>
+                <DataGridTextColumn Header="Modèle" Binding="{Binding Vehicle_model }"/>
+                <DataGridTextColumn Header="Immatriculation" Binding="{Binding Matriculation }"/>
+                <DataGridTextColumn Header="Entreprise client" Binding="{Binding Client_company }"/>
+                <DataGridTextColumn Header="Nom et prénom du conducteur" Binding="{Binding Driver }"/>
+                <DataGridTextColumn Header="Statut du véhicule" Binding="{Binding State }"/>
+                <DataGridTextColumn Header="Statut réservation" Binding="{Binding Booking_status }"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!-- Booked vehicles and to be returned by the client -->
+        <StackPanel Margin="10 10 0 0" Grid.Row="1" Grid.Column="2" HorizontalAlignment="Center" Orientation="Horizontal">
+            <TextBlock Grid.Row="1" Grid.Column="1" FontSize="20">
+            Véhicules réservés et à restituer par le client</TextBlock>
+            <Button Margin="10 0 0 0" Command="{Binding FlushCommand}">Actualiser</Button>
+        </StackPanel>
+        <DataGrid Grid.Row="2" Grid.Column="2" 
+                  Margin="20,20,20,20" Grid.RowSpan="2" 
+                  ItemsSource="{Binding CompletedVehicles }" 
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}"/>
+                <DataGridTextColumn Header="Modèle" Binding="{Binding Vehicle_model}"/>
+                <DataGridTextColumn Header="Immatriculation" Binding="{Binding Matriculation}"/>
+                <DataGridTextColumn Header="Entreprise client" Binding="{Binding Client_company}"/>
+                <DataGridTextColumn Header="Nom et prénom du conducteur" Binding="{Binding Driver}"/>
+                <DataGridTextColumn Header="Statut du véhicule" Binding="{Binding State}"/>
+                <DataGridTextColumn Header="Statut réservation" Binding="{Binding Booking_status}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>
